@@ -3,6 +3,28 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* Make sidebar move below main content on smaller screens */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: auto;
+    padding: 20px;
+    order: 2; /* make sure aside comes after main */
+  }
+
+  main {
+    margin-left: 0;
+    margin-top: 70px; /* still leave space for header */
+    order: 1; /* make sure main comes first */
+  }
+}
+
 
 body {
   font-family: Arial, sans-serif;
