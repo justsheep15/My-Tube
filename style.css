@@ -155,7 +155,7 @@ main {
 /* ✅ Mobile / Bottom Nav */
 
   
-/* ✅ Mobile / Bottom Nav for Galaxy J Max (800px) */
+/* For tablets (up to 800px) */
 @media screen and (max-width: 800px) {
   aside {
     position: fixed;
@@ -201,3 +201,23 @@ main {
   }
 }
 
+/* ✅ Additional fix for small phones (up to 480px) */
+@media screen and (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-box {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+}
