@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fatima Ladies Tailor | 2026 Bespoke Atelier</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --royal: #002366;
+            --sky: #F0F7FF;
+            --gold: #D4AF37;
+            --white: #ffffff;
+            --black: #050505;
+            --glass: rgba(255, 255, 255, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        html, body { overflow-x: hidden; width: 100%; background: var(--white); scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--royal); transition: background 1s ease; }
+
+        /* --- 1. INTRO SCENE (UNTOUCHED - AS YOU LOVED IT) --- */
+        #intro-engine {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .intro-word {
+            font-family: 'Playfair Display';
+            font-size: clamp(1.5rem, 6vw, 4rem);
+            color: var(--white);
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            position: absolute;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .artisan-sub {
+            font-family: 'Playfair Display';
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            margin-top: 80px;
+            opacity: 0;
+            transition: 1.5s;
+        }
+        .gold-line {
+            position: absolute;
+            bottom: 30%;
+            width: 0; height: 1px;
+            background: var(--gold);
+        }
+
+        /* --- 2. CUSTOM CURSOR (IMPROVED) --- */
+        #cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 11000; }
+        #cursor-aura { position: fixed; width: 40px; height: 40px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 10999; transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1); }
+
+        /* --- 3. INNER ANIMATION ENGINE (NEXT LEVEL) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(100px) skewY(5deg);
+            filter: blur(10px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) skewY(0);
+            filter: blur(0);
+        }
+
+        /* Float Animation for Images */
+        .float-img {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 9000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0,35,102,0.05);
+        }
+        .logo { font-family: 'Playfair Display'; font-weight: 900; letter-spacing: 5px; }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            background: var(--sky);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero h1 { 
+            font-family: 'Playfair Display'; 
+            font-size: clamp(3rem, 12vw, 9rem); 
+            line-height: 0.9; 
+            text-align: center;
+            mix-blend-mode: multiply;
+        }
+
+        /* --- GLASS SERVICES --- */
+        .section { padding: 150px 10%; width: 100%; position: relative; }
+        
+        .card-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 40px; 
+        }
+        
+        .glass-card {
+            background: var(--glass);
+            padding: 60px;
+            height: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+            transition: 0.6s;
+        }
+        .glass-card:hover {
+            transform: scale(1.02);
+            border-color: var(--gold);
+            background: var(--white);
+        }
+        .glass-card h3 { font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 20px; }
+
+        /* --- ARTISAN SECTION --- */
+        .artisan-spread {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 100px;
+            align-items: center;
+            background: var(--royal);
+            color: white;
+        }
+        .signature-text {
+            font-family: 'Playfair Display';
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        /* --- LOOKBOOK (ZOOM SCROLL) --- */
+        .lookbook-item {
+            width: 100%;
+            height: 80vh;
+            margin-bottom: 50px;
+            overflow: hidden;
+            position: relative;
+        }
+        .lookbook-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.2);
+            transition: 1s ease-out;
+        }
+
+        /* --- FOOTER --- */
+        footer { padding: 120px 10% 40px; background: var(--black); color: white; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 80px; }
+        .f-label { color: var(--gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 25px; display: block; }
+        
+        /* UPDATED WHATSAPP FAB */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 40px; right: 40px;
+            width: 75px; height: 75px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 35px; z-index: 9999;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-decoration: none;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .whatsapp-btn:hover { transform: scale(1.1) rotate(10deg); }
+
+        @media (max-width: 900px) {
+            * { cursor: auto !important; }
+            .artisan-spread { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .section { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursor-aura"></div>
+
+    <!-- INTRO ENGINE (UNTOUCHED) -->
+    <div id="intro-engine">
+        <div class="intro-word" id="w1">PRECISION</div>
+        <div class="intro-word" id="w2">ARTISTRY</div>
+        <div class="intro-word" id="w3">
+            FATIMA LADIES TAILOR
+            <div class="artisan-sub" id="w3-sub">Artist: Shirin Maniyar</div>
+        </div>
+        <div class="gold-line" id="g-line"></div>
+    </div>
+
+    <!-- UPDATED WHATSAPP LINK -->
+    <a href="https://wa.me/7719042196" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header>
+        <div class="logo">FATIMA ATELIER</div>
+        <div style="font-size: 0.6rem; letter-spacing: 3px;">SANGAMNER</div>
+    </header>
+
+    <main>
+        
+        <!-- HERO -->
+        <section class="hero">
+            <div class="reveal">
+                <p class="f-label" style="color: var(--royal); text-align: center;">2026 Collection</p>
+                <h1 id="hero-title">The Element<br>Of Style</h1>
+            </div>
+        </section>
+
+        <!-- THE CRAFT (Long Content) -->
+        <section class="section">
+            <div class="card-grid">
+                <div class="reveal">
+                    <div class="lookbook-item" style="height: 600px;">
+                        <img src="https://images.unsplash.com/photo-1520006403993-47400cad673a?q=80&w=1200" class="float-img" alt="">
+                    </div>
+                    <div style="margin-top: 40px;">
+                        <span class="f-label">Standard 01</span>
+                        <h2 style="font-family: 'Playfair Display'; font-size: 3rem;">Structural Integrity</h2>
+                        <p style="opacity: 0.6; margin-top: 20px;">We use architectural drafting techniques to ensure your garment maintains its form while providing effortless movement. Every curve is calculated; every seam is reinforced.</p>
+                    </div>
+                </div>
+                <div class="reveal" style="margin-top: 100px;">
+                    <div class="lookbook-item" style="height: 600px;">
+                        <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=1200" class="float-img" alt="">
+                    </div>
+                    <div style="margin-top: 40px;">
+                        <span class="f-label">Standard 02</span>
+                        <h2 style="font-family: 'Playfair Display'; font-size: 3rem;">Master Finishing</h2>
+                        <p style="opacity: 0.6; margin-top: 20px;">The beauty is in the details. Our gold-standard finishing ensures zero visible flaws, creating a professional "Sigma" look that commands respect in every room.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARTISAN PROFILE (The Shirin Spread) -->
+        <section class="section artisan-spread">
+            <div class="reveal">
+                <span class="f-label">The Visionary</span>
+                <h2 class="signature-text">Shirin Maniyar</h2>
+                <p style="margin-top: 30px; font-weight: 200; font-size: 1.2rem; line-height: 2;">A master of feminine silhouettes, Shirin Maniyar blends mathematical precision with artistic grace. Based on Kolhewadi Road, her atelier has become a sanctuary for women who seek the ultimate fit.</p>
+                <br>
+                <a href="tel:7719042196" style="color: var(--gold); letter-spacing: 5px; text-decoration: none; font-size: 0.8rem; border-bottom: 1px solid var(--gold); padding-bottom: 10px;">DIRECT CALL</a>
+            </div>
+            <div class="reveal" style="height: 600px; overflow: hidden;">
+                <img src="https://images.unsplash.com/photo-1550684376-efcbd6e3f031?q=80&w=1200" style="width: 100%; height: 100%; object-fit: cover;" class="float-img">
+            </div>
+        </section>
+
+        <!-- SERVICES (Glassmorphism) -->
+        <section class="section" style="background: var(--sky);" id="services-bg">
+            <div class="reveal" style="text-align: center; margin-bottom: 100px;">
+                <span class="f-label">The Archive</span>
+                <h2 style="font-family: 'Playfair Display'; font-size: 3.5rem;">Sartorial Expertise</h2>
+            </div>
+            <div class="card-grid">
+                <div class="glass-card reveal">
+                    <span class="f-label">Expertise 01</span>
+                    <h3>Native<br>Bespoke</h3>
+                    <p>Traditional silhouettes reimagined with sharp, modern precision.</p>
+                </div>
+                <div class="glass-card reveal" style="background: var(--royal); color: white;">
+                    <span class="f-label" style="color: var(--gold);">Expertise 02</span>
+                    <h3>English<br>Tailoring</h3>
+                    <p>Bespoke blazers and evening gowns crafted for a commanding presence.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE LEGACY (Scroll Zoom Effect) -->
+        <section class="section">
+            <div class="reveal" style="text-align: center;">
+                <span class="f-label">Visual Library</span>
+                <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 60px;">The Archive</h2>
+            </div>
+            <div class="lookbook-item reveal">
+                <img src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1200" id="zoom-img">
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="logo" style="color: white; font-size: 1.8rem; margin-bottom: 30px;">FATIMA LADIES TAILOR</div>
+                <p style="opacity: 0.4;">Kolhewadi Road, Sangamner. The standard of excellence in bespoke female wear. Designed for the discerning woman.</p>
+            </div>
+            <div>
+                <span class="f-label">Atelier</span>
+                <p>Kolhewadi Road,<br>Sangamner</p>
+            </div>
+            <div>
+                <span class="f-label">Contact</span>
+                <p>Shirin Maniyar</p>
+                <p>Call & WhatsApp:</p>
+                <p style="color: var(--gold); font-size: 1.2rem;">7719042196</p>
+            </div>
+        </div>
+        <div style="margin-top: 100px; text-align: center; font-size: 0.6rem; opacity: 0.3; letter-spacing: 3px;">
+            © 2026 FATIMA LADIES TAILOR | DESIGNED BY ABRAR MANIYAR
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. INTRO ENGINE (UNTOUCHED) ---
+        const w1 = document.getElementById('w1');
+        const w2 = document.getElementById('w2');
+        const w3 = document.getElementById('w3');
+        const sub = document.getElementById('w3-sub');
+        const line = document.getElementById('g-line');
+        const intro = document.getElementById('intro-engine');
+
+        function startIntro() {
+            setTimeout(() => { w1.style.opacity = '1'; w1.style.transform = 'translateY(0)'; }, 500);
+            setTimeout(() => { w1.style.opacity = '0'; }, 2000);
+            setTimeout(() => { w2.style.opacity = '1'; w2.style.transform = 'translateY(0)'; }, 2500);
+            setTimeout(() => { w2.style.opacity = '0'; }, 4000);
+            setTimeout(() => { 
+                w3.style.opacity = '1'; w3.style.transform = 'translateY(0)';
+                line.style.width = '250px';
+                sub.style.opacity = '1';
+            }, 4500);
+            setTimeout(() => { 
+                intro.style.transform = 'translateY(-100%)';
+                intro.style.transition = '1.5s cubic-bezier(1, 0, 0, 1)';
+            }, 8000);
+        }
+        startIntro();
+
+        // --- 2. THE CURSOR ---
+        const dot = document.getElementById('cursor');
+        const aura = document.getElementById('cursor-aura');
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            aura.style.left = e.clientX - 20 + 'px';
+            aura.style.top = e.clientY - 20 + 'px';
+        });
+
+        // --- 3. THE NEXT-LEVEL REVEAL ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- 4. ADVANCED PARALLAX & ZOOM ENGINE ---
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            // Hero Title Movement
+            document.getElementById('hero-title').style.transform = `translateY(${scrolled * 0.3}px)`;
+            
+            // Floating Images
+            document.querySelectorAll('.float-img').forEach(img => {
+                img.style.transform = `translateY(${scrolled * -0.05}px)`;
+            });
+
+            // Zoom on Archive Image
+            const zoomImg = document.getElementById('zoom-img');
+            const val = 1.2 - (scrolled / 10000);
+            if(val > 1) zoomImg.style.transform = `scale(${val})`;
+
+            // Background Color Shift
+            if(scrolled > 2000) {
+                document.body.style.background = "#E3F2FD";
+            } else {
+                document.body.style.background = "#ffffff";
+            }
+        });
+    </script>
+</body>
+</html>
